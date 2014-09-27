@@ -23,7 +23,7 @@ module.exports = {
     //
     // Node defaults to 2 minutes.
     res.setTimeout(0);
-
+console.log('fuck');
     req.file('files[]')
     .upload({
 
@@ -31,14 +31,24 @@ module.exports = {
       maxBytes: 1000000,
 
       dirname: path.resolve('', 'assets/useruploads')
-      
     }, function whenDone(err, uploadedFiles) {
+      var filenameContainer = uploadedFiles[0].fd.split('/')
+          filename          = filenameContainer[filenameContainer.length - 1 ];
+          filelocation      = '/useruploads/' + filename;
+      console.log(filename);
+      var temp = {};
+      temp.files = [
+        {
+          "name": uploadedFiles.filename,
+          "size": uploadedFiles.size,
+          "url": filelocation,
+          "thumbnailUrl": filelocation
+        }
+      ];
+
       console.log(uploadedFiles);
       if (err) return res.serverError(err);
-      else return res.json({
-        files: uploadedFiles,
-        textParams: req.params.all()
-      });
+      else return res.send(temp);
     });
   },
 
