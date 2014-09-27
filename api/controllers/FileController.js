@@ -24,7 +24,7 @@ module.exports = {
     // Node defaults to 2 minutes.
     res.setTimeout(0);
 
-    req.file('avatar')
+    req.file('files[]')
     .upload({
 
       // You can apply a file upload limit (in bytes)
@@ -33,6 +33,7 @@ module.exports = {
       dirname: path.resolve('', 'assets/useruploads')
       
     }, function whenDone(err, uploadedFiles) {
+      console.log(uploadedFiles);
       if (err) return res.serverError(err);
       else return res.json({
         files: uploadedFiles,
