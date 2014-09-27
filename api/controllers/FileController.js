@@ -4,7 +4,7 @@
  * @description :: Server-side logic for managing files
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-
+var path = require('path');
 module.exports = {
 
 
@@ -28,7 +28,9 @@ module.exports = {
     .upload({
 
       // You can apply a file upload limit (in bytes)
-      maxBytes: 1000000
+      maxBytes: 1000000,
+
+      dirname: path.resolve('', 'assets/useruploads')
       
     }, function whenDone(err, uploadedFiles) {
       if (err) return res.serverError(err);
