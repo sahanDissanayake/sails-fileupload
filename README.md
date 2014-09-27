@@ -1,12 +1,9 @@
-# How do I upload files in Sails?
+How I envision this app to work
 
-Example of using Sails to properly/safely stream file uploads to S3 and/or disk (esp. really big uploads).
+1. User will upload the the images using the homepage
+2. Then the images will be uploaded to to the assets/useruplods folder
 
-> TODO expand this readme
+3. As soon as the upload is done Grunt will inject these files to the .tmp/ folder so that it is publicly available.
 
-See [`api/controllers/FileController.js`](https://github.com/sails101/file-uploads/blob/master/api/controllers/FileController.js#L15).
-=======
-sails-fileupload
-================
 
-File upload demo for sailsjs with bluimp file upload on the frontend
+The problem right now is, I cannot get this to work. Any cotntributions welcome.
