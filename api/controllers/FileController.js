@@ -23,7 +23,6 @@ module.exports = {
     //
     // Node defaults to 2 minutes.
     res.setTimeout(0);
-console.log('fuck');
     req.file('files[]')
     .upload({
 
@@ -64,6 +63,7 @@ console.log('fuck');
    */
   s3upload: function (req, res) {
 
+    console.log(req.file('filedata'));
     // e.g.
     // 0 => infinite
     // 240000 => 4 minutes (240,000 miliseconds)
@@ -72,13 +72,14 @@ console.log('fuck');
     // Node defaults to 2 minutes.
     res.setTimeout(0);
 
-    req.file('avatar').upload({
-      adapter: require('skipper-s3'),
-      bucket: process.env.BUCKET,
-      key: process.env.KEY,
-      secret: process.env.SECRET
+    req.file('filedata').upload({
+      adapter: require('skipper-s3-alt'),
+      fileACL: 'public-read',
+      bucket: '',
+      key: '',
+      secret: ''
     }, function whenDone(err, uploadedFiles) {
-      if (err) return res.serverError(err);
+      if (err) return res.send(err);
       else return res.json({
         files: uploadedFiles,
         textParams: req.params.all()
